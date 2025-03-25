@@ -1,0 +1,426 @@
+.category-card:hover {
+    background-color: var(--light-gray);
+    transform: scale(1.05);
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShopEase - Your One-Stop Shop</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <a href="#" class="back-to-top">Back to Top</a>
+    <!-- Main Title Section -->
+    <div class="main-title-section">
+        <h1 class="main-title">ShopEase</h1>
+    </div>
+
+    <header>
+        <nav class="navbar">
+            <div class="logo" title="Go to Home">
+                <a href="index.html">
+                    <h1><i class="fas fa-shopping-bag"></i> ShopEase</h1>
+                </a>
+            </div>
+            <div class="nav-links">
+                <form id="searchForm">
+                    <div class="search-bar">
+                        <input type="text" id="searchInput" placeholder="Search products...">
+                        <button id="searchButton" type="submit"><i class="fas fa-search"></i></button>
+                    </div>
+                </form>
+                <button id="categoriesButton" class="nav-button">
+                    <i class="fas fa-th-list"></i> Categories
+                </button>
+                <button id="accountButton" class="nav-button">
+                    <i class="fas fa-user"></i> Account
+                </button>
+                <button id="cartButton" class="nav-button">
+                    <i class="fas fa-shopping-cart"></i> Cart
+                    <span id="cart-count">0</span>
+                </button>
+                <button id="trendingButton" class="nav-button">
+                    <i class="fas fa-fire"></i> Trending
+                </button>
+                <button id="helpButton" class="nav-button">
+                    <i class="fas fa-question-circle"></i> Help
+                </button>
+                <button id="faqButton" class="nav-button">
+                    <i class="fas fa-info-circle"></i> FAQ
+                </button>
+            </div>
+        </nav>
+
+        <!-- Help Modal -->
+        <div id="helpModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2><i class="fas fa-question-circle"></i> Help & Support</h2>
+                    <button class="close-modal" onclick="closeModal('helpModal')">×</button>
+                </div>
+                <div class="modal-body">
+                    <div class="help-section">
+                        <h3><i class="fas fa-envelope"></i> Contact Us</h3>
+                        <p>For any inquiries or assistance, please reach out to our support team:</p>
+                        <div class="contact-info">
+                            <div class="contact-item">
+                                <i class="fas fa-envelope"></i>
+                                <a href="mailto:mgorrepa@gmu.edu">mgorrepa@gmu.edu</a>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-envelope"></i>
+                                <a href="mailto:smikkil@gmu.edu">smikkil@gmu.edu</a>
+                            </div>
+                        </div>
+                        <p class="response-time">We typically respond within 24 hours.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- FAQ Modal -->
+        <div id="faqModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2><i class="fas fa-info-circle"></i> Frequently Asked Questions</h2>
+                    <button class="close-modal" onclick="closeModal('faqModal')">×</button>
+                </div>
+                <div class="modal-body">
+                    <div class="faq-section">
+                        <div class="faq-item">
+                            <div class="faq-question" onclick="toggleFAQ(this)">
+                                <i class="fas fa-plus"></i>
+                                <h3>How do I place an order?</h3>
+                            </div>
+                            <div class="faq-answer">
+                                <p>Browse our products, add items to your cart, and proceed to checkout. Follow the simple steps to complete your purchase.</p>
+                            </div>
+                        </div>
+                        <div class="faq-item">
+                            <div class="faq-question" onclick="toggleFAQ(this)">
+                                <i class="fas fa-plus"></i>
+                                <h3>What payment methods do you accept?</h3>
+                            </div>
+                            <div class="faq-answer">
+                                <p>We accept all major credit cards, debit cards, and digital payment methods.</p>
+                            </div>
+                        </div>
+                        <div class="faq-item">
+                            <div class="faq-question" onclick="toggleFAQ(this)">
+                                <i class="fas fa-plus"></i>
+                                <h3>How can I track my order?</h3>
+                            </div>
+                            <div class="faq-answer">
+                                <p>Once your order is shipped, you'll receive a tracking number via email to monitor your delivery status.</p>
+                            </div>
+                        </div>
+                        <div class="faq-item">
+                            <div class="faq-question" onclick="toggleFAQ(this)">
+                                <i class="fas fa-plus"></i>
+                                <h3>What is your return policy?</h3>
+                            </div>
+                            <div class="faq-answer">
+                                <p>We offer a 30-day return policy for most items. Products must be in original condition with tags attached.</p>
+                            </div>
+                        </div>
+                        <div class="faq-item">
+                            <div class="faq-question" onclick="toggleFAQ(this)">
+                                <i class="fas fa-plus"></i>
+                                <h3>Do you ship internationally?</h3>
+                            </div>
+                            <div class="faq-answer">
+                                <p>Yes, we ship to most countries worldwide. Shipping costs and delivery times vary by location.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+
+        <!-- Cart Section -->
+        <section class="cart-section" id="cartSection" style="display: none;">
+            <div class="cart-container">
+                <h2><i class="fas fa-shopping-cart"></i> Your Cart</h2>
+                <div id="cart-items" class="cart-items">
+                    <!-- Cart items will be displayed here -->
+                </div>
+                <div class="cart-summary">
+                    <div class="total">Total: $<span id="cart-total">0.00</span></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Categories Menu -->
+        <div id="categoriesMenu" class="categories-menu" style="display: none;">
+            <div class="categories-container">
+                <h2><i class="fas fa-th-list"></i> Shop by Category</h2>
+                <ul id="categoryList">
+                    <li data-category="electronics">
+                        <div class="category-card" data-category="electronics">
+                            <img src="https://images.unsplash.com/photo-1498049794561-7780e7231661?w=500" alt="Electronics">
+                            <div class="category-info">
+                                <i class="fas fa-laptop"></i>
+                                <span>Electronics</span>
+                            </div>
+                        </div>
+                    </li>
+                    <li data-category="fashion">
+                        <div class="category-card" data-category="fashion">
+                            <img src="https://images.unsplash.com/photo-1445205170230-053b83016050?w=500" alt="Fashion">
+                            <div class="category-info">
+                                <i class="fas fa-tshirt"></i>
+                                <span>Fashion</span>
+                            </div>
+                        </div>
+                    </li>
+                    <li data-category="home">
+                        <div class="category-card" data-category="home">
+                            <img src="https://images.unsplash.com/photo-1484101403633-562f891dc89a?w=500" alt="Home & Living">
+                            <div class="category-info">
+                                <i class="fas fa-home"></i>
+                                <span>Home & Living</span>
+                            </div>
+                        </div>
+                    </li>
+                    <li data-category="sports">
+                        <div class="category-card" data-category="sports">
+                            <img src="https://images.unsplash.com/photo-1517649763962-0c623066013b?w=500" alt="Sports">
+                            <div class="category-info">
+                                <i class="fas fa-basketball-ball"></i>
+                                <span>Sports & Outdoors</span>
+                            </div>
+                        </div>
+                    </li>
+                    <li data-category="beauty">
+                        <div class="category-card" data-category="beauty">
+                            <img src="https://images.unsplash.com/photo-1612817288484-6f916006741a?w=500" alt="Beauty">
+                            <div class="category-info">
+                                <i class="fas fa-spa"></i>
+                                <span>Beauty</span>
+                            </div>
+                        </div>
+                    </li>
+                    <li data-category="watches">
+                        <div class="category-card" data-category="watches">
+                            <img src="https://images.unsplash.com/photo-1523170335258-f5ed11844a49?w=500" alt="Watches">
+                            <div class="category-info">
+                                <i class="fas fa-clock"></i>
+                                <span>Watches</span>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Filter Section -->
+        <div class="filter-section">
+            <button id="filterButton" class="filter-btn">
+                <i class="fas fa-filter"></i> Filter Products
+            </button>
+            <div id="filterMenu" class="filter-menu" style="display: none;">
+                <div class="filter-group">
+                    <h3>Price Range</h3>
+                    <select id="priceFilter">
+                        <option value="all">All Prices</option>
+                        <option value="0-50">$0 - $50</option>
+                        <option value="50-100">$50 - $100</option>
+                        <option value="100-200">$100 - $200</option>
+                        <option value="200+">$200+</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <h3>Rating</h3>
+                    <select id="ratingFilter">
+                        <option value="all">All Ratings</option>
+                        <option value="4+">4+ Stars</option>
+                        <option value="3+">3+ Stars</option>
+                        <option value="2+">2+ Stars</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <h3>Category</h3>
+                    <select id="categoryFilter">
+                        <option value="all">All Categories</option>
+                        <option value="electronics">Electronics</option>
+                        <option value="fashion">Fashion</option>
+                        <option value="home">Home</option>
+                        <option value="sports">Sports</option>
+                        <option value="beauty">Beauty</option>
+                        <option value="watches">Watches</option>
+                    </select>
+                </div>
+                <button id="applyFilters" class="apply-filters-btn">
+                    <i class="fas fa-check"></i> Apply Filters
+                </button>
+                <button id="clearFilters" class="clear-filters-btn">
+                    <i class="fas fa-times"></i> Clear Filters
+                </button>
+            </div>
+        </div>
+
+        <!-- Trending Section with Category Display -->
+        <section class="trending-section" id="trendingSection">
+            <div class="section-header">
+                <h2><i class="fas fa-fire"></i> Trending Products</h2>
+                <p class="section-subtitle">Discover what's popular right now</p>
+            </div>
+            <p class="category-description" id="categoryDescription"></p>
+            <div class="trending-grid" id="trending-items">
+                <!-- Products will be dynamically added here -->
+            </div>
+        </section>
+
+        <!-- Search Results Section -->
+        <section class="search-results-section" id="searchResultsSection" style="display: none;">
+            <div class="section-header">
+                <h2><i class="fas fa-search"></i> Search Results</h2>
+                <p class="section-subtitle">Found <span id="resultCount">0</span> items</p>
+            </div>
+            <div class="search-results-grid" id="searchResults">
+                <!-- Search results will be displayed here -->
+            </div>
+        </section>
+
+        <!-- Similar Items Section -->
+        <section class="similar-items-section" id="similarItemsSection" style="display: none;">
+            <div class="section-header">
+                <h2><i class="fas fa-tags"></i> Similar Items</h2>
+                <p class="section-subtitle">You might also like these</p>
+            </div>
+            <div class="similar-items-grid" id="similarItems">
+                <!-- Similar items will be dynamically added here -->
+            </div>
+        </section>
+
+        <!-- Account Section -->
+        <section class="account-section" id="accountSection" style="display: none;">
+            <div class="account-container">
+                <div id="accountHeader">
+                    <h2><i class="fas fa-user"></i> <span id="accountTitle">My Account</span></h2>
+                    <button id="closeAccount" class="close-btn"><i class="fas fa-times"></i></button>
+                </div>
+                
+                <!-- Login Form -->
+                <div id="loginForm" class="auth-form">
+                    <input type="email" id="loginEmail" placeholder="Email" required>
+                    <input type="password" id="loginPassword" placeholder="Password" required>
+                    <div class="remember-me">
+                        <input type="checkbox" id="rememberMe">
+                        <label for="rememberMe">Remember me</label>
+                    </div>
+                    <button type="submit" id="loginButton">Login</button>
+                    <p>Don't have an account? <a href="#" id="showRegister">Register</a></p>
+                </div>
+
+                <!-- Register Form -->
+                <div id="registerForm" class="auth-form" style="display: none;">
+                    <input type="text" id="registerName" placeholder="Full Name" required>
+                    <input type="email" id="registerEmail" placeholder="Email" required>
+                    <input type="password" id="registerPassword" placeholder="Password" required>
+                    <input type="password" id="confirmPassword" placeholder="Confirm Password" required>
+                    <button type="submit" id="registerButton">Create Account</button>
+                    <p>Already have an account? <a href="#" id="showLogin">Login</a></p>
+                </div>
+
+                <!-- User Profile (shown after login) -->
+                <div id="userProfile" class="user-profile" style="display: none;">
+                    <div class="profile-header">
+                        <div class="profile-avatar">
+                            <i class="fas fa-user-circle"></i>
+                        </div>
+                        <h3 id="userName">User Name</h3>
+                        <p id="userEmail">user@email.com</p>
+                    </div>
+                    <div class="profile-actions">
+                        <button id="viewOrders" class="profile-btn">
+                            <i class="fas fa-shopping-bag"></i> My Orders
+                        </button>
+                        <button id="editProfile" class="profile-btn">
+                            <i class="fas fa-edit"></i> Edit Profile
+                        </button>
+                        <button id="logoutButton" class="profile-btn logout">
+                            <i class="fas fa-sign-out-alt"></i> Logout
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Checkout Modal -->
+        <div id="checkoutModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2><i class="fas fa-shopping-cart"></i> Checkout</h2>
+                    <span class="close-modal" onclick="closeCheckoutModal()">&times;</span>
+                </div>
+                <form id="checkoutForm" onsubmit="processCheckout(event)">
+                    <div class="form-section">
+                        <h3><i class="fas fa-map-marker-alt"></i> Shipping Address</h3>
+                        <div class="form-group">
+                            <input type="text" id="fullName" required placeholder="Full Name">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="streetAddress" required placeholder="Street Address">
+                        </div>
+                        <div class="form-row">
+                            <input type="text" id="city" required placeholder="City">
+                            <input type="text" id="state" required placeholder="State">
+                            <input type="text" id="zipCode" required placeholder="ZIP Code">
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h3><i class="fas fa-credit-card"></i> Payment Details</h3>
+                        <div class="form-group">
+                            <input type="text" id="cardNumber" required placeholder="Card Number" maxlength="16" pattern="\d{16}">
+                        </div>
+                        <div class="form-row">
+                            <input type="text" id="expiryDate" required placeholder="MM/YY" maxlength="5" pattern="(0[1-9]|1[0-2])\/([0-9]{2})">
+                            <input type="text" id="cvv" required placeholder="CVV" maxlength="3" pattern="\d{3}">
+                        </div>
+                    </div>
+
+                    <div class="order-summary">
+                        <h3><i class="fas fa-receipt"></i> Order Summary</h3>
+                        <div id="checkoutItemsList"></div>
+                        <div class="total-amount">
+                            <span>Total:</span>
+                            <span id="checkoutTotal"></span>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="checkout-btn">
+                        <i class="fas fa-lock"></i> Place Order Securely
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Newsletter Section -->
+        <div class="newsletter">
+            <h2>Subscribe to Our Newsletter</h2>
+            <form id="newsletter-form">
+                <input type="email" id="newsletter-email" placeholder="Enter your email" required>
+                <button type="submit">Subscribe</button>
+            </form>
+            <div id="subscription-message" class="subscription-message"></div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2024 ShopEase. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
